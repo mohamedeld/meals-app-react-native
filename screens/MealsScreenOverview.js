@@ -15,12 +15,16 @@ const MealsScreenOverview = ({route,navigation}) => {
       title:category?.title
     })
   },[navigation,catId])
-  
+  function handleNavigation(id){
+    navigation.navigate("meal-details",{
+      mealId:id
+    })
+  }
   return (
     <View style={styles.container}> 
       <FlatList data={displayedMeals} renderItem={(itemData=>{
         return (
-          <MealItem title={itemData?.item?.title} imageUrl={itemData?.item?.imageUrl} duration={itemData?.item?.duration} complexity={itemData?.item?.complexity} affordability={itemData?.item?.affordability}/>
+          <MealItem title={itemData?.item?.title} imageUrl={itemData?.item?.imageUrl} duration={itemData?.item?.duration} complexity={itemData?.item?.complexity} affordability={itemData?.item?.affordability} onPress={()=> handleNavigation(itemData?.item?.id)}/>
         )
       })} keyExtractor={(item)=> item?.id}/>
     </View>
